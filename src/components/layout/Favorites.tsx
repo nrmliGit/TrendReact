@@ -3,6 +3,7 @@ import {
   useFavorites,
 } from "../../providers/contexts/FavoritesContext";
 import CartButton from "./CartButton";
+import HeartButton from "./HeartButton";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
@@ -23,8 +24,8 @@ function FavoriteItem({ favorite }: { favorite: Favorite }) {
   return (
     <>
       <div
-        key={favorite.productId}
-        id={`${favorite.productId}`}
+        key={favorite.id}
+        id={`${favorite.id}`}
         className="w-[228px] h-[445px] relative border-solid border border-[#ccc] rounded-lg"
       >
         <img className="mx-[27px] h-[267px]" src={favorite.image} />
@@ -39,8 +40,9 @@ function FavoriteItem({ favorite }: { favorite: Favorite }) {
             <span className="text-[14px]">{favorite.price} TL</span>
           </div>
         </div>
-        <div className="flex justify-between left-[10px] right-[10px]  border  border-solid rounded absolute bottom-[10px] border-[#f27a1a]  p-[10px]">
+        <div>
           <CartButton item={favorite} />
+          <HeartButton item={favorite} />
         </div>
       </div>
     </>

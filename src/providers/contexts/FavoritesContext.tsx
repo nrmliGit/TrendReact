@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 export type Favorite = {
-  productId: number;
+  id: number;
   name: string;
   description: string;
   image: string;
@@ -24,15 +24,13 @@ export default function FavoritiesProvider({ children }: PropsWithChildren) {
 
   const toggleFavoriteItem = (favorite: Favorite) => {
     setFavorites((state) => {
-      const foundIndex = state.findIndex(
-        (item) => item.productId === favorite.productId
-      );
-      console.log(foundIndex);
-      if (foundIndex < 0) {
-        return [...state, favorite];
-      } else {
-        return state.filter((item) => item.productId !== favorite.productId);
-      }
+      const foundIndex = state.findIndex((item) => item.id === favorite.id);
+
+      if (foundIndex < 0) return [...state, favorite];
+      else if (foundIndex >= 0)
+        return state.filter((item) => item.id !== state[foundIndex].id);
+
+      return state;
     });
   };
 

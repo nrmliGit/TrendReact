@@ -1,16 +1,9 @@
 import { Heart } from "lucide-react";
 
 import { useFavorites } from "../../providers/contexts/FavoritesContext";
+import { Product } from "../../providers/contexts/ProductContext";
 
-interface HeartButtonProps {
-  productId: number;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-}
-
-export default function HeartButton({ item }: { item: HeartButtonProps }) {
+export default function HeartButton({ item }: { item: Product }) {
   const { toggle } = useFavorites();
   return (
     <button
@@ -20,12 +13,12 @@ export default function HeartButton({ item }: { item: HeartButtonProps }) {
           image: item.image,
           name: item.name,
           price: item.price,
-          productId: Number(item.productId),
+          id: Number(item.id),
         })
       }
-      className="border-2 border-[#ccc] border-solid rounded-full px-[5px] py-[2px]"
+      className="border-2 border-[#ccc] hover:border-[#f27a1a] border-solid rounded-full px-[5px] py-[2px] absolute right-[15px] bottom-[17px]"
     >
-      <Heart className="w-[20px] text-[#a9a8a8]" />
+      <Heart className="w-[20px] hover:text-[#f27a1a] text-[#a9a8a8]" />
     </button>
   );
 }

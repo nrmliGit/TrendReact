@@ -1,13 +1,13 @@
 import { useCart } from "../../providers/contexts/CartContext";
 import { Product } from "../../providers/contexts/ProductContext";
 
-export default function CartButton({ item }: { item: Product }) {
-  const { addItem } = useCart();
+export default function DeleteButton({ item }: { item: Product }) {
+  const { removeItem } = useCart();
   return (
     <>
       <button
         onClick={() =>
-          addItem?.({
+          removeItem?.({
             description: item.description,
             image: item.image,
             name: item.name,
@@ -15,9 +15,9 @@ export default function CartButton({ item }: { item: Product }) {
             id: Number(item.id),
           })
         }
-        className=" flex justify-between left-[10px] right-[10px]  text-[#f27a1a] border  border-solid rounded absolute bottom-[10px] border-[#f27a1a]  p-[10px]"
+        className="flex justify-between left-[10px] right-[10px]  text-[#f27a1a] border  border-solid rounded absolute bottom-[10px] border-[#f27a1a]  p-[10px]"
       >
-        Sepete ekle
+        Sil
       </button>
     </>
   );

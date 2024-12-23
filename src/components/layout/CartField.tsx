@@ -1,4 +1,5 @@
 import { CartItem, useCart } from "../../providers/contexts/CartContext";
+import DeleteButton from "./DeleteButton";
 
 export default function Favorites() {
   const { cart } = useCart();
@@ -31,9 +32,8 @@ function CartProduct({ cartItem }: { cartItem: CartItem }) {
             <span className="text-[14px]">{cartItem.price} TL</span>
           </div>
         </div>
-        <div className="flex justify-between left-[10px] right-[10px]  border  border-solid rounded absolute bottom-[10px] border-[#f27a1a]  p-[10px]">
-          <button className=" text-[#f27a1a]">Sepete ekle</button>
-        </div>
+
+        <DeleteButton item={cartItem} />
       </div>
     </>
   );
