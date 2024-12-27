@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export type Favorite = {
   id: number;
@@ -20,7 +26,13 @@ const FavoritesContext = createContext<FavoritesState>({
 export const useFavorites = () => useContext(FavoritesContext);
 
 export default function FavoritiesProvider({ children }: PropsWithChildren) {
-  const [favorites, setFavorites] = useState<FavoritesState["favorites"]>([]);
+  const [favorites, setFavorites] = useState<FavoritesState["favorites"]>(
+    JSON.parse(localStorage.getItem("favorites") ?? "[]")
+  );
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   const toggleFavoriteItem = (favorite: Favorite) => {
     setFavorites((state) => {

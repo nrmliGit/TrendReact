@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export type CartItem = {
   id: number;
@@ -21,7 +27,13 @@ const CartContext = createContext<CartState>({
 
 export const useCart = () => useContext(CartContext);
 export default function CartProvider({ children }: PropsWithChildren) {
-  const [cart, setCart] = useState<CartState["cart"]>([]);
+  const [cart, setCart] = useState<CartState["cart"]>(
+    JSON.parse(localStorage.getItem("cart") ?? "[]")
+  );
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const toggleCartItem = (cartItem: CartItem) => {
     setCart((state) => {
